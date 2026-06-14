@@ -9,6 +9,7 @@ import React from "react";
 import CategoryLink from "../../components/CategoryLink";
 import ProductCard from "../../components/ProductCard";
 import NewestProductCard from "../../components/NewestProductCard";
+import FeaturedProductCard from "../../components/FeaturedProductCard";
 
 const categoriesLink = [
   {
@@ -142,6 +143,68 @@ const newestProductItems = [
   },
 ];
 
+const featuredProductItems = [
+  {
+    thumbnail: "headphone",
+    storeName: "soundwave",
+    brand: "Headphone Wireless Premium",
+    rating: 4.8,
+    stocks: 512,
+    salePrice: 4500000,
+    regularPrice: 650000,
+  },
+  {
+    thumbnail: "smartphone",
+    storeName: "PhoneX",
+    brand: "wristTech",
+    rating: 4.8,
+    stocks: 512,
+    salePrice: 4200000,
+    regularPrice: 5000000,
+  },
+  {
+    thumbnail: "smartwatch",
+    storeName: "wirstTch",
+    brand: "SmartWatch series 5",
+    rating: 4.8,
+    stocks: 512,
+    salePrice: 4500000,
+    regularPrice: 650000,
+  },
+
+  {
+    thumbnail: "sneakers",
+    storeName: "SportPro",
+    brand: "Sneakers Sport Runfast",
+    rating: 4.8,
+    stocks: 512,
+    salePrice: 4500000,
+    regularPrice: 650000,
+  },
+
+
+  {
+   thumbnail: "coffe-maker",
+    storeName: "Brewmaster",
+    brand: "Coffe Maker Otomatis",
+    rating: 4.8,
+    stocks: 512,
+    salePrice: 4500000,
+    regularPrice: 650000,
+  },
+
+  {
+    thumbnail: "dress",
+    storeName: "FashionID",
+    brand: "Dress Floral Midi",
+    rating: "4.5",
+    stocks: 312,
+    price: 295000,
+    salePrice: 4500000,
+    regularPrice: 650000,
+  },
+];
+
 const LandingPage = () => {
   return (
     <main className="landing-page-content flex flex-col gap-6 bg-[#f8f9fb]">
@@ -264,12 +327,12 @@ const LandingPage = () => {
       <section className="shop-by-category">
         <div className="label flex items-center justify-between">
           <div className="flex items-center gap-3">
-          <TrendingUp size={24} />
+            <TrendingUp size={24} />
             <h4 className="text-2xl font-semibold">Produk Terbaru</h4>
           </div>
           <a className="flex items-center gap-1" href="">
             Lihat semua
-            <ArrowRight size={16}/>
+            <ArrowRight size={16} />
           </a>
         </div>
         <div className="flash-sale-items grid grid-cols-4 gap-4">
@@ -292,134 +355,26 @@ const LandingPage = () => {
 
       <section>
         <div className="label flex items-center justify-between">
-          <h4>Produk Unggulan</h4>
-          <a href="">
+          <h4 className="font-bold text-2xl">Produk Unggulan</h4>
+          <a className="flex items-center gap-2" href="">
             Lihat semua
-            <img src="./images/arrow-right-blue.svg" alt="" />
+            <ArrowRight size={16}/>
           </a>
         </div>
-        <div className="flash-sale-items">
-          <div className="item-col bg-white">
-            <div className="item-thumbnail relative">
-              <span className="disc-icon bg-red text-white absolute">-31%</span>
-              <img src="./images/Headphone Wireless Premium.png" alt="" />
-            </div>
-            <div className="item-description flex flex-col gap-4">
-              <p className="text-gray">Sound Wave</p>
-              <p>Headphone Wireless Premium</p>
-              <div className="item-rating">
-                <img src="./images/five-star.png" alt="" />
-                <span className="text-gray">4.8 (512)</span>
-              </div>
-              <div className="item-price">
-                <span>Rp.450.000</span>
-                <span className="text-gray text-decoration-line">
-                  Rp.650.000
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="item-col bg-white">
-            <div className="item-thumbnail relative">
-              <span className="disc-icon bg-red text-white absolute">-31%</span>
-              <img src="./images/Headphone Wireless Premium.png" alt="" />
-            </div>
-            <div className="item-description flex flex-col gap-4">
-              <p className="text-gray">Sound Wave</p>
-              <p>Headphone Wireless Premium</p>
-              <div className="item-rating">
-                <img src="./images/five-star.png" alt="" />
-                <span className="text-gray">4.8 (512)</span>
-              </div>
-              <div className="item-price">
-                <span>Rp.450.000</span>
-                <span className="text-gray text-decoration-line">
-                  Rp.650.000
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="item-col bg-white">
-            <div className="item-thumbnail relative">
-              <span className="disc-icon bg-red text-white absolute">-31%</span>
-              <img src="./images/Headphone Wireless Premium.png" alt="" />
-            </div>
-            <div className="item-description flex flex-col gap-4">
-              <p className="text-gray">Sound Wave</p>
-              <p>Headphone Wireless Premium</p>
-              <div className="item-rating">
-                <img src="./images/five-star.png" alt="" />
-                <span className="text-gray">4.8 (512)</span>
-              </div>
-              <div className="item-price">
-                <span>Rp.450.000</span>
-                <span className="text-gray text-decoration-line">
-                  Rp.650.000
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="item-col bg-white">
-            <div className="item-thumbnail relative">
-              <span className="disc-icon bg-red text-white absolute">-31%</span>
-              <img src="./images/Headphone Wireless Premium.png" alt="" />
-            </div>
-            <div className="item-description flex flex-col gap-4">
-              <p className="text-gray">Sound Wave</p>
-              <p>Headphone Wireless Premium</p>
-              <div className="item-rating">
-                <img src="./images/five-star.png" alt="" />
-                <span className="text-gray">4.8 (512)</span>
-              </div>
-              <div className="item-price">
-                <span>Rp.450.000</span>
-                <span className="text-gray text-decoration-line">
-                  Rp.650.000
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="item-col bg-white">
-            <div className="item-thumbnail relative">
-              <span className="disc-icon bg-red text-white absolute">-31%</span>
-              <img src="./images/Headphone Wireless Premium.png" alt="" />
-            </div>
-            <div className="item-description flex flex-col gap-4">
-              <p className="text-gray">Sound Wave</p>
-              <p>Headphone Wireless Premium</p>
-              <div className="item-rating">
-                <img src="./images/five-star.png" alt="" />
-                <span className="text-gray">4.8 (512)</span>
-              </div>
-              <div className="item-price">
-                <span>Rp.450.000</span>
-                <span className="text-gray text-decoration-line">
-                  Rp.650.000
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="item-col bg-white">
-            <div className="item-thumbnail relative">
-              <span className="disc-icon bg-red text-white absolute">-31%</span>
-              <img src="./images/Headphone Wireless Premium.png" alt="" />
-            </div>
-            <div className="item-description flex flex-col gap-4">
-              <p className="text-gray">Sound Wave</p>
-              <p>Headphone Wireless Premium</p>
-              <div className="item-rating">
-                <img src="./images/five-star.png" alt="" />
-                <span className="text-gray">4.8 (512)</span>
-              </div>
-              <div className="item-price">
-                <span>Rp.450.000</span>
-                <span className="text-gray text-decoration-line">
-                  Rp.650.000
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className="flash-sale-items grid grid-cols-4 gap-4">
+          {featuredProductItems.map((e, i) => (
+            <FeaturedProductCard
+              key={e.thumbnail}
+              thumbnail={e.thumbnail}
+              storeName={e.storeName}
+              brand={e.brand}
+              rating={e.rating}
+              salePrice={e.salePrice}
+              regularPrice={e.regularPrice}
+              stocks={e.stocks}
+              idx={i + 1}
+            />
+          ))}
         </div>
       </section>
 
