@@ -238,7 +238,7 @@ const LandingPage = () => {
         </button>
       </section>
 
-      <section className="px-50 category-prod flex flex-col gap-4">
+      <section className="category-prod flex flex-col gap-4 px-50">
         <div className="label flex justify-between">
           <h4 className="">Belanja Berdasarkan Kategori</h4>
           <a className="flex items-center" href="">
@@ -259,7 +259,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="flash-deal">
+      <section className="flash-deal px-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="bg-red-600 p-1.5 rounded-xl flash-deal-icon bg-red text-white">
@@ -293,7 +293,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="deals-container gap-4 flex">
+      <section className="deals-container gap-4 flex px-50">
         <div className="deal deal-1 flex-1 relative ">
           <img
             className="w-full rounded-2xl object-cover block"
@@ -324,7 +324,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="shop-by-category">
+      <section className="shop-by-category px-50">
         <div className="label flex items-center justify-between">
           <div className="flex items-center gap-3">
             <TrendingUp size={24} />
@@ -353,7 +353,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section>
+      <section className="p-50">
         <div className="label flex items-center justify-between">
           <h4 className="font-bold text-2xl">Produk Unggulan</h4>
           <a className="flex items-center gap-2" href="">
@@ -378,34 +378,34 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="why-shop-section">
-        <div className="bg-white why-shop-container">
-          <h3 className="text-center">Kenapa belanja di BeliMudah?</h3>
-          <div className="features-container flex">
-            <div className="text-center feature-item">
+      <section className="why-shop-section p-50">
+        <div className="bg-white why-shop-container border flex flex-col p-9 rounded-2xl gap-6 border-[#0000001a]">
+          <h3 className="text-center font-bold text-2xl">Kenapa belanja di BeliMudah?</h3>
+          <div className="features-container flex justify-between">
+            <div className="text-center flex flex-col gap-4 feature-item w-2/5">
               <span>🚚</span>
-              <p className="feature-title">Gratis Ongkir</p>
+              <p className="font-medium">Gratis Ongkir</p>
               <p className="feature-desc">
                 Pembelian di atas Rp 100.000 gratis ongkir ke seluruh Indonesia
               </p>
             </div>
-            <div className="text-center feature-item">
+            <div className="text-center flex flex-col gap-4 feature-item w-2/5 ">
               <span>🔒</span>
-              <p className="feature-title">Keamanan Terjamin</p>
+              <p className="font-medium">Keamanan Terjamin</p>
               <p className="feature-desc">
                 Data kamu terenskripsi dengan standar keamanan tinggi
               </p>
             </div>
-            <div className="text-center feature-item">
+            <div className="text-center flex flex-col gap-4 feature-item w-2/5">
               <span>↩️</span>
-              <p className="feature-title">Pengembalian Mudah</p>
+              <p className="font-medium">Pengembalian Mudah</p>
               <p className="feature-desc">
                 Produk tidak sesuai? Kembalikan dalam 30 hari tanpa ribet
               </p>
             </div>
-            <div className="text-center feature-item">
+            <div className="text-center flex flex-col gap-4 feature-item w-2/5">
               <span>💬</span>
-              <p className="feature-title">Layanan 24/7</p>
+              <p className="font-medium">Layanan 24/7</p>
               <p className="feature-desc">
                 Tim kami siap membantu kamu kapan saja
               </p>
