@@ -25,7 +25,7 @@ const Navbar = () => {
         </div>
       </header>
 
-      <nav>
+      <nav className="bg-white">
         <div className="top-nav grid grid-cols-4 px-50 py-2">
           <Link className="icon-beli-mudah flex items-center gap-3" to="/">
             <div className="icon bg-[#1a73e8] p-3 rounded-lg size-9 flex items-center justify-center text-white">
