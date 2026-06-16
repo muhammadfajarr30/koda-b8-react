@@ -126,7 +126,7 @@ const browseProductItems = [
 const BrowsePage = () => {
   return (
     <>
-      <main className="relative">
+      <main className="relative bg-gray-100">
         <button className="floating-bubble-chat right-0 bg-blue">
           <img src="images/bubble-chat.svg" alt="" />
         </button>
@@ -136,7 +136,7 @@ const BrowsePage = () => {
             <ChevronRight size={20} />
             <a href="">Toko</a>
           </div>
-          <h2 className="text-2xl font-bold">Semua Produk</h2>
+          <h2 className="text-2xl font-bold my-5">Semua Produk</h2>
           <div className="product-table grid grid-cols-[minmax(256px,_20vw)_1fr] gap-12">
             <aside className="cell-sidebar flex flex-col gap-6">
               <div className="price-filter">
@@ -237,7 +237,7 @@ const BrowsePage = () => {
                 </div>
 
                 <div className="text-center load-more m-10">
-                  <button className=" p-6 border border-blue-500 rounded-2xl text-blue-500">Muat Lebih Banyak Produk (6 produk lagi)</button>
+                  <button className=" p-4 border border-blue-500 rounded-2xl text-blue-500 cursor-pointer">Muat Lebih Banyak Produk (6 produk lagi)</button>
                 </div>
               </section>
             </section>
