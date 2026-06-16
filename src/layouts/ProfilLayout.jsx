@@ -19,9 +19,9 @@ const ProfilLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="flex gap-6 bg-blue-50">
-        <div className=" gap-2 min-w-1/6 flex flex-col ">
-          <div className=" p-4 flex items-center flex-col justify-center bg-white border border-gray-100 rounded-xl">
+      <div className="flex gap-6 bg-[#f8f9fb] max-w-7xl mx-auto py-10">
+        <div className=" gap-2 min-w-1/4 flex flex-col ">
+          <div className=" p-4 flex items-center flex-col justify-center bg-white border border-gray-200 rounded-xl">
             <div className="px-6 py-4 font-bold text-blue-500 bg-blue-100 rounded-full ">
               <p className="font-bold text-xl">B</p>
             </div>
@@ -41,7 +41,7 @@ const ProfilLayout = () => {
             </div>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-xl">
+          <div className="bg-white border border-gray-200 rounded-xl">
             <div className="p-4 flex flex-col gap-8">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ const ProfilLayout = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 max-7xl bg-blue-50">
+        <div className="flex-1 bg-[#f8f9fb]">
           <Outlet />
         </div>
       </div>
