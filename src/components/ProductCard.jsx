@@ -1,6 +1,6 @@
 const ProductCard = ({idx, thumbnail, salePrice, regularPrice, storeName, brand,rating, stocks}) => {
   return (
-    <div className="item-col flash-item1 bg-white rounded-xl">
+    <div className="item-col flash-item1 bg-white rounded-xl shadow-xl">
       <div className="item-thumbnail relative">
         <span className="disc-icon bg-[#DC2626] rounded-2xl px-2 py-1 text-white absolute top-3 left-2  ">-31%</span>
         <img
