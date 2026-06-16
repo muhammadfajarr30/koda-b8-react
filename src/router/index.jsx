@@ -9,6 +9,7 @@ import LoginPage from "../pages/auth/LoginPage";
 import CheckoutLayout from "../layouts/CheckoutLayout";
 import AddressPage from "../pages/checkout/AddressPage";
 import PaymentPage from "../pages/checkout/PaymentPage";
+import ConfirmOrderPage from "../pages/checkout/ConfirmOrderPage";
 
 export const router = createBrowserRouter([
   // {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "payment",
         element: <PaymentPage/>
+      },
+      {
+        path: "confirm-order",
+        element: <ConfirmOrderPage/>
       }
     ],
   },
