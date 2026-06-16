@@ -8,7 +8,7 @@ const CheckoutLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="my-4">
+      <div className=" py-4 bg-gray-100">
         <div>
           <div className="flex items-center justify-center">
             <div className="flex flex-col items-center">
@@ -39,7 +39,7 @@ const CheckoutLayout = () => {
           <div className=" flex-1">
             <Outlet />
           </div>
-          <div className=" min-w-1/4 border h-fit border-gray-500 rounded-xl flex gap-4">
+          <div className=" min-w-1/4 border h-fit border-gray-500 rounded-xl bg-white flex gap-4">
             <section className="order-summary p-4">
               <div className="container-order flex flex-col gap-3">
                 <div className="heading">
