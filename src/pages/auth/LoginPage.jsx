@@ -1,5 +1,6 @@
 import React from "react";
 import AuthHero from "../../components/AuthHero";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
@@ -30,9 +31,9 @@ const LoginPage = () => {
             <h2 className="font-bold text-2xl">Masuk ke Akun</h2>
             <p className="text-gray-500">
               Belum punya akun?
-              <a className="text-blue-500" href="./register.html">
+              <Link className="text-blue-500" to="">
                 Daftar gratis
-              </a>
+              </Link>
             </p>
           </div>
 
