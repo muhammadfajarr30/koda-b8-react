@@ -10,6 +10,15 @@ import CheckoutLayout from "../layouts/CheckoutLayout";
 import AddressPage from "../pages/checkout/AddressPage";
 import PaymentPage from "../pages/checkout/PaymentPage";
 import ConfirmOrderPage from "../pages/checkout/ConfirmOrderPage";
+import ProfilLayout from "../layouts/ProfilLayout";
+import MyOrderPage from "../pages/profile/MyOrderPage";
+import WishlistPage from "../pages/profile/WishlistPage";
+import AddressListPage from "../pages/profile/AddressListPage";
+import EditProfilePage from "../pages/profile/EditProfilePage";
+import RegisterPage from "../pages/auth/RegisterPage";
+import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
+import CheckoutSuccessPage from "../pages/checkout/CheckoutSuccessPage";
+
 
 export const router = createBrowserRouter([
   // {
@@ -22,6 +31,7 @@ export const router = createBrowserRouter([
       { path: "/browse", element: <BrowsePage /> },
       { path: "/detail-page", element: <DetailPage /> },
       { path: "/cart", element: <CartPage /> },
+      {path: "/checkout-success", element: <CheckoutSuccessPage/>}
     ],
   },
 
@@ -31,21 +41,54 @@ export const router = createBrowserRouter([
   },
 
   {
+    path: "/register",
+    element: <RegisterPage/>
+  },
+
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage/>
+  },
+
+  {
     element: <CheckoutLayout />,
     path: "/checkout",
     children: [
       {
         path: "address",
-        element: <AddressPage/>
+        element: <AddressPage />,
       },
       {
         path: "payment",
-        element: <PaymentPage/>
+        element: <PaymentPage />,
       },
       {
         path: "confirm-order",
-        element: <ConfirmOrderPage/>
-      }
+        element: <ConfirmOrderPage />,
+      },
     ],
+  },
+
+  {
+    element: <ProfilLayout />,
+    path: "/profile",
+    children: [
+      {
+        path:"order",
+        element: <MyOrderPage/>
+      },
+      {
+        path: "wishlist-page",
+        element: <WishlistPage/>
+      },
+      {
+        path: "address-list",
+        element:<AddressListPage/>
+      },
+      {
+        path: "edit-profile",
+        element:<EditProfilePage/>
+      },
+    ]
   },
 ]);
