@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthHero from "../../components/AuthHero";
-import { Link } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("data")) || [])
+  const navigate = useNavigate()
+
+  const handlClick = () => {
+    navigate('/login')
+  }
+  const inputData = (data) => {
+    const newData = [...user, data]
+    localStorage.setItem("data", JSON.stringify(newData))
+    setUser(newData)    
+  }
+
+  const  { 
+    register,
+    handleSubmit,
+    reset,
+    
+  } = useForm()
+
+
   return (
     <div className="grid grid-cols-2">
       <AuthHero
@@ -17,7 +39,7 @@ const RegisterPage = () => {
         ]}
       />
       <section className="login flex items-center justify-center">
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(inputData)} className="flex flex-col gap-4" >
           <div className="heading">
             <h2 className="font-bold text-2xl">Masuk ke Akun</h2>
             <p className="text-gray-500">
@@ -52,8 +74,8 @@ const RegisterPage = () => {
           </div>
 
           <div className="form-group flex flex-col font-medium ">
-            <label for="name">Nama Lengkap</label>
-            <input
+            <label htmlFor="name">Nama Lengkap</label>
+            <input {...register('fullName')}
               className="border border-gray-400 p-3 rounded-2xl"
               type="text"
               id="name"
@@ -61,8 +83,8 @@ const RegisterPage = () => {
             />
           </div>
           <div className="form-group flex flex-col font-medium ">
-            <label for="email">Email</label>
-            <input
+            <label htmlFor="email">Email</label>
+            <input {...register('email')}
               className="border border-gray-400 p-3 rounded-2xl"
               type="email"
               id="email"
@@ -72,10 +94,10 @@ const RegisterPage = () => {
 
           <div className="form-group flex flex-col">
             <div className="password-label ">
-              <label for="password">Kata Sandi</label>
+              <label htmlFor="password">Kata Sandi</label>
             </div>
 
-            <input
+            <input {...register('password')}
               className="border border-gray-400 p-3 rounded-2xl"
               type="password"
               id="password"
@@ -84,10 +106,10 @@ const RegisterPage = () => {
           </div>
           <div className="form-group flex flex-col">
             <div className="password-label ">
-              <label for="password"> Konfirmasi Kata Sandi</label>
+              <label htmlFor="password"> Konfirmasi Kata Sandi</label>
             </div>
 
-            <input
+            <input {...register('confirmPassword')}
               className="border border-gray-400 p-3 rounded-2xl"
               type="password"
               id="password"
@@ -97,12 +119,12 @@ const RegisterPage = () => {
 
           <div className="remember text-gray-500">
             <label className="flex gap-2">
-              <input type="checkbox" />
+              <input {...register('rememberMe')} type="checkbox" />
               <p>Saya Menyetujui <Link className="text-blue-500" to="">Syarat & Ketentuan</Link> dan <Link className="text-blue-500">Kebijakan Privasi</Link> BeliMudah</p>
             </label>
           </div>
 
-          <button
+          <button onClick={handlClick}
             className="btn-login w-full bg-orange-500 p-4 rounded-2xl text-white flex items-center gap-2 justify-center"
             type="submit">
             Daftar Sekarang
