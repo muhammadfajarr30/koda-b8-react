@@ -10,6 +10,12 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
+  const currentUser =
+    JSON.parse(localStorage.getItem("account")) || {};
+
+  const lastName =
+    currentUser.fullName?.split(" ").slice(-1)[0] || "Guest";
+    console.log(currentUser)
   return (
     <>
       <header className="bg-[#1a73e8] text-white px-50 py-1.25">
@@ -47,20 +53,22 @@ const Navbar = () => {
               </button>
             </li>
             <li className="nav-item">
-              <button className="flex items-center gap-2">
+              <Link to="/profile/edit-profile" className="flex items-center gap-2">
                 <User size={16} />
-                <span>Budi</span>
-              </button>
+                <span>{lastName}</span>
+              </Link>
             </li>
-            <li className="nav-item">
+            <Link to="/profile/wishlist" className="nav-item">
               <button className="flex items-center">
                 <Heart size={16} />
               </button>
-            </li>
+            </Link>
             <li className="nav-item">
+              <Link to="/cart">
               <button className="flex items-center">
                 <ShoppingCart size={16} />
               </button>
+              </Link>
             </li>
           </ul>
         </div>
