@@ -1,8 +1,24 @@
 import React from "react";
 import AuthHero from "../../components/AuthHero";
-import { Link } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+
+  const handleLogin = (data) => {
+    const users = JSON.parse(localStorage.getItem("data")) || [];
+    const user = users.find((item)=> item.email === data.email && item.password === data.password)
+
+    if (user) {
+      alert("login berhasil!");
+      localStorage.setItem("account", JSON.stringify(user));
+      navigate("/");
+    } else {
+      alert("email atau password salah!");
+    }
+  };
   return (
     <div className="grid grid-cols-2">
       <AuthHero
@@ -26,12 +42,14 @@ const LoginPage = () => {
       />
 
       <section className="login flex items-center justify-center">
-        <form className="flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit(handleLogin)}
+          className="flex flex-col gap-4">
           <div className="heading">
             <h2 className="font-bold text-2xl">Masuk ke Akun</h2>
             <p className="text-gray-500">
               Belum punya akun?
-              <Link className="text-blue-500" to="">
+              <Link className="text-blue-500" to="/register">
                 Daftar gratis
               </Link>
             </p>
@@ -61,17 +79,27 @@ const LoginPage = () => {
           </div>
 
           <div className="form-group flex flex-col font-medium ">
-            <label for="email">Email</label>
-            <input className="border border-gray-400 p-3 rounded-2xl" type="email" id="email" placeholder="email@contoh.com" />
+            <label htmlFor="email">Email</label>
+            <input
+              {...register("email")}
+              className="border border-gray-400 p-3 rounded-2xl"
+              type="email"
+              id="email"
+              placeholder="email@contoh.com"
+            />
           </div>
 
           <div className="form-group flex flex-col">
             <div className="password-label flex justify-between">
-              <label for="password">Kata Sandi</label>
-              <a className="text-blue-500" href="./auth-forget-password.html">Lupa kata sandi?</a>
+              <label htmlFor="password">Kata Sandi</label>
+              <a className="text-blue-500" href="./auth-forget-password.html">
+                Lupa kata sandi?
+              </a>
             </div>
 
-            <input className="border border-gray-400 p-3 rounded-2xl"
+            <input
+              {...register("password")}
+              className="border border-gray-400 p-3 rounded-2xl"
               type="password"
               id="password"
               placeholder="Masukkan kata sandi"
@@ -80,22 +108,33 @@ const LoginPage = () => {
 
           <div className="remember text-gray-500">
             <label className="flex gap-2">
-              <input type="checkbox" /> 
+              <input {...register("remember")} type="checkbox" />
               <p>Ingat saya selama 30 hari</p>
             </label>
           </div>
 
-          <button className="btn-login w-full bg-blue-500 p-4 rounded-2xl text-white" type="submit">
+          <button
+            className="btn-login w-full bg-blue-500 p-4 rounded-2xl text-white"
+            type="submit">
             Masuk
           </button>
 
-          <p className="security text-gray-400 text-center">🔒 Login aman dengan enkripsi SSL 256-bit</p>
+          <p className="security text-gray-400 text-center">
+            🔒 Login aman dengan enkripsi SSL 256-bit
+          </p>
 
           <p className="terms text-gray-500">
             Dengan masuk, kamu menyetujui
-            <a  href="#" className="text-blue-500"> Syarat & Ketentuan</a>
+            <a href="#" className="text-blue-500">
+              {" "}
+              Syarat & Ketentuan
+            </a>
             dan
-            <a href="#" className="text-blue-500" > Kebijakan Privasi</a>.
+            <a href="#" className="text-blue-500">
+              {" "}
+              Kebijakan Privasi
+            </a>
+            .
           </p>
         </form>
       </section>
