@@ -28,8 +28,8 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <LandingPage /> },
-      { path: "/browse", element: <BrowsePage /> },
-      { path: "/detail-page", element: <DetailPage /> },
+      { path: "/browse/:slug", element: <BrowsePage /> },
+      { path: "/detail-page/:id", element: <DetailPage /> },
       { path: "/cart", element: <CartPage /> },
       {path: "/checkout-success", element: <CheckoutSuccessPage/>}
     ],
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
         element: <MyOrderPage/>
       },
       {
-        path: "wishlist-page",
+        path: "wishlist",
         element: <WishlistPage/>
       },
       {
