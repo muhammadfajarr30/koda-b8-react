@@ -1,129 +1,139 @@
 import { ChevronRight } from "lucide-react";
 import React from "react";
 import BrowseProductCard from "../../components/BrowseProductCard";
+import { products } from "../../data/products";
+import { categories } from "../../data/categories";
+import { useParams } from "react-router-dom";
 
-const browseProductItems = [
-  {
-    thumbnail: "headphone",
-    storeName: "soundwave",
-    brand: "Headphone Wireless Premium",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "smartphone",
-    storeName: "PhoneX",
-    brand: "wristTech",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4200000,
-    regularPrice: 5000000,
-  },
-  {
-    thumbnail: "smartwatch",
-    storeName: "wirstTch",
-    brand: "SmartWatch series 5",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
+// const browseProductItems = [
+//   {
+//     thumbnail: "headphone",
+//     storeName: "soundwave",
+//     brand: "Headphone Wireless Premium",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "smartphone",
+//     storeName: "PhoneX",
+//     brand: "wristTech",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4200000,
+//     regularPrice: 5000000,
+//   },
+//   {
+//     thumbnail: "smartwatch",
+//     storeName: "wirstTch",
+//     brand: "SmartWatch series 5",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
 
-  {
-    thumbnail: "sneakers",
-    storeName: "SportPro",
-    brand: "Sneakers Sport Runfast",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
+//   {
+//     thumbnail: "sneakers",
+//     storeName: "SportPro",
+//     brand: "Sneakers Sport Runfast",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
 
-  {
-    thumbnail: "coffe-maker",
-    storeName: "Brewmaster",
-    brand: "Coffe Maker Otomatis",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
+//   {
+//     thumbnail: "coffe-maker",
+//     storeName: "Brewmaster",
+//     brand: "Coffe Maker Otomatis",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
 
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-];
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "dress",
+//     storeName: "FashionID",
+//     brand: "Dress Floral Midi",
+//     rating: "4.5",
+//     stocks: 312,
+//     price: 295000,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+// ];
 
 const BrowsePage = () => {
+  const { slug } = useParams();
+
+  const filteredProducts = products.filter(
+    (product) => product.category === slug,
+    
+  );
+  
   return (
     <>
       <main className="relative bg-gray-100">
@@ -136,7 +146,7 @@ const BrowsePage = () => {
             <ChevronRight size={20} />
             <a href="">Toko</a>
           </div>
-          <h2 className="text-2xl font-bold my-5">Semua Produk</h2>
+          <h2>{slug}</h2>
           <div className="product-table grid grid-cols-[minmax(256px,_20vw)_1fr] gap-12">
             <aside className="cell-sidebar flex flex-col gap-6">
               <div className="price-filter">
@@ -207,7 +217,7 @@ const BrowsePage = () => {
 
             <section className="cell-content">
               <div className="flex items-center justify-between">
-                <span>18 produk ditemukan</span>
+                {filteredProducts.length} produk ditemukan
                 <div className="d-flex items-center gap-2">
                   <label for="category">Urutkan:</label>
                   <select name="category" id="category">
@@ -220,24 +230,20 @@ const BrowsePage = () => {
               </div>
 
               <section className="">
-                <div className="flash-sale-items grid grid-cols-4 gap-4">
-                  {browseProductItems.map((e, i) => (
+                <div className="grid grid-cols-4 gap-4">
+                  {filteredProducts.map((product, i) => (
                     <BrowseProductCard
-                      key={e.thumbnail}
-                      thumbnail={e.thumbnail}
-                      storeName={e.storeName}
-                      brand={e.brand}
-                      rating={e.rating}
-                      salePrice={e.salePrice}
-                      regularPrice={e.regularPrice}
-                      stocks={e.stocks}
+                      key={product.id}
+                      {...product}
                       idx={i + 1}
                     />
                   ))}
                 </div>
 
                 <div className="text-center load-more m-10">
-                  <button className=" p-4 border border-blue-500 rounded-2xl text-blue-500 cursor-pointer">Muat Lebih Banyak Produk (6 produk lagi)</button>
+                  <button className=" p-4 border border-blue-500 rounded-2xl text-blue-500 cursor-pointer">
+                    Muat Lebih Banyak Produk (6 produk lagi)
+                  </button>
                 </div>
               </section>
             </section>
