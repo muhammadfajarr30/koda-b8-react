@@ -10,78 +10,80 @@ import CategoryLink from "../../components/CategoryLink";
 import ProductCard from "../../components/ProductCard";
 import NewestProductCard from "../../components/NewestProductCard";
 import FeaturedProductCard from "../../components/FeaturedProductCard";
+import { categories } from "../../data/categories";
+import { products } from "../../data/products";
 
-const categoriesLink = [
-  {
-    title: "Elektronik",
-    amount: 5,
-    thumbnail: "electronic",
-  },
-  {
-    title: "Fashion",
-    amount: 10,
-    thumbnail: "fashion",
-  },
-  {
-    title: "Rumah & Dapur",
-    amount: 10,
-    thumbnail: "house-kitchen",
-  },
-  {
-    title: "Kecantikan",
-    amount: 10,
-    thumbnail: "beauty",
-  },
-  {
-    title: "Olahraga",
-    amount: 10,
-    thumbnail: "sport",
-  },
-  {
-    title: "Buku & Alat Tulis",
-    amount: 10,
-    thumbnail: "book",
-  },
-];
+// const categoriesLink = [
+//   {
+//     title: "Elektronik",
+//     amount: 5,
+//     thumbnail: "electronic",
+//   },
+//   {
+//     title: "Fashion",
+//     amount: 10,
+//     thumbnail: "fashion",
+//   },
+//   {
+//     title: "Rumah & Dapur",
+//     amount: 10,
+//     thumbnail: "house-kitchen",
+//   },
+//   {
+//     title: "Kecantikan",
+//     amount: 10,
+//     thumbnail: "beauty",
+//   },
+//   {
+//     title: "Olahraga",
+//     amount: 10,
+//     thumbnail: "sport",
+//   },
+//   {
+//     title: "Buku & Alat Tulis",
+//     amount: 10,
+//     thumbnail: "book",
+//   },
+// ];
 
-const productsFlashItems = [
-  {
-    thumbnail: "headphone",
-    storeName: "soundwave",
-    brand: "Headphone Wireless Premium",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "smartphone",
-    storeName: "PhoneX",
-    brand: "wristTech",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4200000,
-    regularPrice: 5000000,
-  },
-  {
-    thumbnail: "smartwatch",
-    storeName: "wirstTch",
-    brand: "SmartWatch series 5",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "sneakers",
-    storeName: "SportPro",
-    brand: "Sneakers Sport Runfast",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-];
+// const productsFlashItems = [
+//   {
+//     thumbnail: "headphone",
+//     storeName: "soundwave",
+//     brand: "Headphone Wireless Premium",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "smartphone",
+//     storeName: "PhoneX",
+//     brand: "wristTech",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4200000,
+//     regularPrice: 5000000,
+//   },
+//   {
+//     thumbnail: "smartwatch",
+//     storeName: "wirstTch",
+//     brand: "SmartWatch series 5",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+//   {
+//     thumbnail: "sneakers",
+//     storeName: "SportPro",
+//     brand: "Sneakers Sport Runfast",
+//     rating: 4.8,
+//     stocks: 512,
+//     salePrice: 4500000,
+//     regularPrice: 650000,
+//   },
+// ];
 
 const newestProductItems = [
   {
@@ -182,9 +184,8 @@ const featuredProductItems = [
     regularPrice: 650000,
   },
 
-
   {
-   thumbnail: "coffe-maker",
+    thumbnail: "coffe-maker",
     storeName: "Brewmaster",
     brand: "Coffe Maker Otomatis",
     rating: 4.8,
@@ -247,12 +248,13 @@ const LandingPage = () => {
           </a>
         </div>
         <div className="category-prod-container grid grid-cols-6 gap-4">
-          {categoriesLink.map((e, i) => (
+          {categories.map((category, i) => (
             <CategoryLink
-              key={e.thumbnail}
-              title={e.title}
-              amount={e.amount}
-              thumbnail={e.thumbnail}
+              key={category.slug}
+              title={category.title}
+              amount={category.amount}
+              thumbnail={category.thumbnail}
+              slug={category.slug}
               idx={i + 1}
             />
           ))}
@@ -277,17 +279,18 @@ const LandingPage = () => {
           </a>
         </div>
         <div className="flash-sale-items grid grid-cols-4 gap-4">
-          {productsFlashItems.map((e, i) => (
+          {products.map((product, i) => (
             <ProductCard
-              key={e.thumbnail}
-              thumbnail={e.thumbnail}
-              storeName={e.storeName}
-              brand={e.brand}
-              rating={e.rating}
-              salePrice={e.salePrice}
-              regularPrice={e.regularPrice}
-              stocks={e.stocks}
+              key={product.id}
+              thumbnail={product.thumbnail}
+              storeName={product.storeName}
+              brand={product.brand}
+              rating={product.rating}
+              salePrice={product.salePrice}
+              regularPrice={product.regularPrice}
+              stocks={product.stocks}
               idx={i + 1}
+              id={product.id}
             />
           ))}
         </div>
@@ -358,7 +361,7 @@ const LandingPage = () => {
           <h4 className="font-bold text-2xl">Produk Unggulan</h4>
           <a className="flex items-center gap-2" href="">
             Lihat semua
-            <ArrowRight size={16}/>
+            <ArrowRight size={16} />
           </a>
         </div>
         <div className="flash-sale-items grid grid-cols-4 gap-4">
@@ -380,7 +383,9 @@ const LandingPage = () => {
 
       <section className="why-shop-section p-50">
         <div className="bg-white why-shop-container border flex flex-col p-9 rounded-2xl gap-6 border-[#0000001a]">
-          <h3 className="text-center font-bold text-2xl">Kenapa belanja di BeliMudah?</h3>
+          <h3 className="text-center font-bold text-2xl">
+            Kenapa belanja di BeliMudah?
+          </h3>
           <div className="features-container flex justify-between">
             <div className="text-center flex flex-col gap-4 feature-item w-2/5">
               <span>🚚</span>
