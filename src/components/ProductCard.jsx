@@ -1,6 +1,8 @@
-const ProductCard = ({idx, thumbnail, salePrice, regularPrice, storeName, brand,rating, stocks}) => {
+import { Link } from "react-router-dom";
+
+const ProductCard = ({id, idx, thumbnail, salePrice, regularPrice, storeName, brand,rating, stocks}) => {
   return (
-    <div className="item-col flash-item1 bg-white rounded-xl shadow-xl">
+    <Link to={`/detail-page/${id}`} className="item-col flash-item1 bg-white rounded-xl shadow-xl">
       <div className="item-thumbnail relative">
         <span className="disc-icon bg-[#DC2626] rounded-2xl px-2 py-1 text-white absolute top-3 left-2  ">-31%</span>
         <img
@@ -21,7 +23,7 @@ const ProductCard = ({idx, thumbnail, salePrice, regularPrice, storeName, brand,
           <span className=" text-sm text-gray-500 line-through">{regularPrice}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
