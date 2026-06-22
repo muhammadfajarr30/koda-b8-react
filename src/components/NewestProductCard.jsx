@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const NewestProductCard = ({thumbnail, rating, stocks, price, brand, salePrice, regularPrice, storeName} ) => {
+const NewestProductCard = ({id, thumbnail, rating, stocks, price, brand, salePrice, regularPrice, storeName} ) => {
   return (
-     <div className="item-col flash-item1 bg-white rounded-xl">
+     <Link to={`/detail-page/${id}`} className="item-col flash-item1 bg-white rounded-xl shadow-lg">
       <div className="item-thumbnail relative">
         <span className="disc-icon bg-[#DC2626] rounded-2xl px-2 py-1 text-white absolute top-3 left-2  ">-31%</span>
         <img
@@ -23,7 +24,7 @@ const NewestProductCard = ({thumbnail, rating, stocks, price, brand, salePrice, 
           <span className=" text-sm text-gray-500 line-through">{regularPrice}</span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
