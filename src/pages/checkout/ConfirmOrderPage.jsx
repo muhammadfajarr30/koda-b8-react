@@ -1,7 +1,9 @@
 import { Lock, Shield } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmOrderPage = () => {
+  const navigate = useNavigate();
   return (
     <section class="confirm-order bg-white border border-gray-300 rounded-xl p-4">
       <div class="container flex flex-col gap-4">
@@ -24,7 +26,7 @@ const ConfirmOrderPage = () => {
             <div class="product-item flex justify-between">
               <div class="product-detail flex gap-2 items-center">
                 <div className="w-10 rounded-lg overflow-hidden">
-                <img src="/images/headphone.png" alt="" />
+                  <img src="/images/headphone.png" alt="" />
                 </div>
 
                 <div class="product-info">
@@ -37,21 +39,27 @@ const ConfirmOrderPage = () => {
             </div>
           </div>
         </div>
-      <div class="payment-notice flex items-center gap-2 bg-blue-100 rounded-xl p-4 text-gray-500">
-        <Shield color="#17A"/>
-        <p>
-          Dengan menekan "Bayar Sekarang", kamu menyetujui Syarat & Ketentuan
-          kami. Pembayaran baru akan diproses setelah kamu mengonfirmasi di
-          langkah ini.
-        </p>
-      </div>
-      <div class="return-payment flex gap-2">
-        <button class="btn-return border border-gray-300 p-4 rounded-xl">Kembali</button>
-        <button class="btn-payment w-full flex gap-2 justify-center bg-orange-500 text-white p-4 rounded-xl">
-            <Lock size={20}/>
-          <p>Bayar Sekarang</p>
-        </button>
-      </div>
+        <div class="payment-notice flex items-center gap-2 bg-blue-100 rounded-xl p-4 text-gray-500">
+          <Shield color="#17A" />
+          <p>
+            Dengan menekan "Bayar Sekarang", kamu menyetujui Syarat & Ketentuan
+            kami. Pembayaran baru akan diproses setelah kamu mengonfirmasi di
+            langkah ini.
+          </p>
+        </div>
+        <div class="return-payment flex gap-2">
+          <button
+            onClick={() => navigate(-1)}
+            class="btn-return border border-gray-300 p-4 rounded-xl">
+            Kembali
+          </button>
+          <button
+            onClick={() => navigate("/checkout-success")}
+            class="btn-payment w-full flex gap-2 justify-center bg-orange-500 text-white p-4 rounded-xl">
+            <Lock size={20} />
+            <p>Bayar Sekarang</p>
+          </button>
+        </div>
       </div>
     </section>
   );
