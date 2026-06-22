@@ -7,6 +7,8 @@ import {
   Shield,
   Truck,
 } from "lucide-react";
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -64,41 +66,25 @@ const Footer = () => {
             Platform belanja online terpercaya dengan ribuan produk pilihan.
             Belanja mudah, aman, dan menyenangkan.
           </p>
-          <ul className="social-media flex">
+          <ul className="social-media flex gap-4">
             <li className="flex">
               <a href="#">
-                <img
-                  className="social-media-item bg-gray"
-                  src="./images/facebook.svg"
-                  alt="Facebook"
-                />
+                <FaFacebook />
               </a>
             </li>
             <li className="flex">
               <a href="#">
-                <img
-                  className="social-media-item bg-gray"
-                  src="./images/instagram.svg"
-                  alt="Instagram"
-                />
+               <FaInstagram/>
               </a>
             </li>
             <li className="flex">
               <a href="#">
-                <img
-                  className="social-media-item bg-gray"
-                  src="./images/twitter.svg"
-                  alt="Twitter"
-                />
+                <FaTwitter/>
               </a>
             </li>
             <li className="flex">
               <a href="#">
-                <img
-                  className="social-media-item bg-gray"
-                  src="./images/youtube.svg"
-                  alt="YouTube"
-                />
+                <FaYoutube/>
               </a>
             </li>
           </ul>
