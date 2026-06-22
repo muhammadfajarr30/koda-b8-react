@@ -1,11 +1,18 @@
 import { ArrowRight, Truck } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddressPage = () => {
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/checkout/payment");
+  };
+
   return (
     <div>
-      <section className="form-checkout p-4 border border-gray-500 rounded-xl">
-        <form className="flex flex-col gap-3">
+      <section className="form-checkout p-4 border bg-white border-gray-500 rounded-xl">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div className="title flex items-center gap-2">
             <Truck size={24} color="#1A73E8" />
 
@@ -15,7 +22,7 @@ const AddressPage = () => {
             <div className="name flex flex-col w-full ">
               <label htmlFor="name">Nama Penerima *</label>
               <input
-                className="p-3 border border-gray-500 rounded-xl"
+                className="p-3 bg-gray-200 border border-gray-500 rounded-xl"
                 type="text"
                 name=""
                 id="name"
@@ -25,7 +32,7 @@ const AddressPage = () => {
             <div className="phone flex flex-col w-full">
               <label htmlFor="phone">Nomor Telepon *</label>
               <input
-                className="p-3 border border-gray-500 rounded-xl"
+                className="p-3 bg-gray-200 border border-gray-500 rounded-xl"
                 type="tel"
                 id="phone"
                 placeholder="0812-3456-7890"
@@ -35,7 +42,7 @@ const AddressPage = () => {
           <div className="input-group w-full flex flex-col ">
             <label htmlFor="email">Email *</label>
             <input
-              className="p-3 border border-gray-500 rounded-xl"
+              className="p-3 bg-gray-200 border border-gray-500 rounded-xl"
               type="text"
               id="email"
               placeholder="budi@gmail.com"
@@ -44,7 +51,7 @@ const AddressPage = () => {
           <div className="input-group flex flex-col">
             <label htmlFor="address">Alamat Lengkap *</label>
             <input
-              className="p-3 border border-gray-500 rounded-xl"
+              className="p-3 bg-gray-200 border border-gray-500 rounded-xl"
               type="text"
               id="address"
               placeholder="Jl. Kebon Jeruk No. 15"
@@ -54,7 +61,7 @@ const AddressPage = () => {
             <div className="city w-full flex flex-col">
               <label htmlFor="city">Kota *</label>
               <input
-                className=" p-3 border border-gray-500 rounded-xl "
+                className=" p-3 bg-gray-200 border border-gray-500 rounded-xl "
                 type="text"
                 id="city"
                 placeholder="Jakarta Barat"
@@ -63,7 +70,7 @@ const AddressPage = () => {
             <div className="province w-full flex flex-col">
               <label htmlFor="province">Province *</label>
               <input
-                className=" p-3 border border-gray-500 rounded-xl "
+                className=" p-3 bg-gray-200 border border-gray-500 rounded-xl "
                 type="text"
                 id="province"
                 placeholder="DKI Jakarta"
@@ -74,7 +81,7 @@ const AddressPage = () => {
             <div className="zip w-full flex flex-col">
               <label htmlFor="zip">Kode Pos *</label>
               <input
-                className=" p-3 border border-gray-500 rounded-xl "
+                className=" p-3 bg-gray-200 border border-gray-500 rounded-xl "
                 type="number"
                 id="zip"
                 placeholder="11520"
@@ -83,7 +90,7 @@ const AddressPage = () => {
             <div className="note w-full flex flex-col">
               <label htmlFor="notes">Catatan (opsional)</label>
               <input
-                className=" p-3 border border-gray-500 rounded-xl"
+                className=" p-3 bg-gray-200 border border-gray-500 rounded-xl"
                 type="text"
                 id="notes"
                 placeholder="warna pagar, dll."
