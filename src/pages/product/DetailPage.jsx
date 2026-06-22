@@ -1,7 +1,9 @@
 import { ChevronRight, Heart, RefreshCcw, Shield, Truck } from "lucide-react";
 import React from "react";
 import ProductCard from "../../components/ProductCard";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { products } from "../../data/products";
+import { formatRupiah } from "../../helpers/format";
 const relatedProduct = [
   {
     thumbnail: "headphone",
@@ -43,6 +45,10 @@ const relatedProduct = [
 ];
 
 const DetailPage = () => {
+  const {id} = useParams()
+  const product = products.find((e)=>e.id === id)
+  const navigate = useNavigate()
+
   return (
     <>
     <div className="bg-[#f8f9fb]">
@@ -54,50 +60,51 @@ const DetailPage = () => {
         <ChevronRight size={20} />
         <a href="">Electronics</a>
         <ChevronRight size={20} />
-        <a href="">headphone Wireless Premium</a>
+        <a href="">{product.brand}</a>
       </nav>
       <div className="flex flex-col gap-9">
         <div className=" product-container flex justify-center gap-6 px-56">
           <div className="product-view flex-1 max-w-xl">
             <img
               className="w-full h-auto rounded-2xl"
-              src="/images/headphone.png"
-              alt=""
+              src={`/images/${product.thumbnail}.png`}
+              alt={product.brand}
             />
             <div className="product-thumbnail flex gap-4 mt-4">
               <img
                 className="w-20 h-20 object-cover rounded-lg border"
-                src="/images/headphone.png"
-                alt=""
+                src= {`/images/${product.thumbnail}.png`}
+                alt={product.brand}
               />
 
               <img
                 className="w-20 h-20 object-cover rounded-lg border"
-                src="/images/headphone-2.png"
-                alt=""
+                src={`/images/${product.thumbnail}.png`}
+                alt={product.brand}
               />
             </div>
           </div>
           <div className="product-info flex-1 max-w-xl flex flex-col gap-5">
             <div className="brand-item">
-              <p className="text-gray-500">SoundWave · Audio</p>
+              <p className="text-gray-500">{product.storeName}</p>
             </div>
             <div>
-              <h2 className="font-bold text-2xl">Headphone Wireless Premium</h2>
+              <h2 className="font-bold text-2xl">{product.brand}</h2>
             </div>
             <div className="rating flex items-center gap-2">
               <img src="/images/five-star.png" alt="" />
-              <span className="text-gray-500">4.8 (512)</span>
+              <span className="text-gray-500">{product.rating}{product.stocks}</span>
               <span className="text-green-500 bg-green-50 rounded-full p-0.5">
-                ✓ Stok tersedia (45)
+                ✓ Stok tersedia {product.stocks}
               </span>
             </div>
             <div className="price-container bg-blue-50 flex-col p-4 rounded-xl">
               <div className="price-tag flex items-center gap-3">
                 <h2 className="font-bold text-blue-500 text-2xl ">
-                  Rp. 450.000
+                  {formatRupiah(product.salePrice ?? product.regularPrice)}
+                  
                 </h2>
-                <p className="text-gray-500 line-through">Rp.650.000</p>
+                <p className="text-gray-500 line-through">{formatRupiah(product.regularPrice)}</p>
                 <span className="text-white bg-red-600 rounded-full text-xs p-1">
                   Hemat 31%
                 </span>
@@ -107,7 +114,7 @@ const DetailPage = () => {
               </div>
             </div>
             <div className="product-color">
-              <p>Warna: Hitam</p>
+              <p>Warna: </p>
               <div className="color-btn flex gap-1.5">
                 <label>
                   <input
@@ -156,15 +163,15 @@ const DetailPage = () => {
                   <span>1</span>
                   <button>+</button>
                 </div>
-                <p className="text-gray-500">stok: 45pcs</p>
+                <p className="text-gray-500">stok: {product.stocks}pcs</p>
               </div>
             </div>
             <div className="buyout flex w-full gap-2">
-              <button className="add-to-cart p-3 w-full text-white rounded-2xl bg-orange-500">
+              <button  className="add-to-cart p-3 w-full text-white rounded-2xl bg-orange-500">
                 <img src="images/cart-orange.svg" alt="" /> Tambahkan Ke
                 Keranjang
               </button>
-              <button className="checkout p-3 w-full rounded-2xl border border-orange-500 text-orange-500">
+              <button type="button" onClick={()=>navigate("/checkout/address")} className="checkout p-3 w-full rounded-2xl border border-orange-500 text-orange-500">
                 Beli Sekarang
               </button>
               <button className="favorite border-gray-300 border p-2 rounded-lg">
@@ -194,7 +201,7 @@ const DetailPage = () => {
           <div className="rounded-lg border border-gray-200 overflow-hidden">
             <div className="flex border-b border-gray-200">
               <button className="px-6 py-4 text-sm font-medium text-blue-500 border-b-2 border-blue-500">
-                Deskripsi
+               Deskripsi
               </button>
 
               <button className="px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700">
@@ -208,9 +215,7 @@ const DetailPage = () => {
 
             <div className="p-6">
               <p className="text-gray-500 leading-relaxed">
-                Headphone wireless dengan teknologi noise-cancelling terdepan.
-                Nikmati musik favoritmu tanpa gangguan dengan kualitas suara
-                yang memukau.
+                {product.description}
               </p>
             </div>
           </div>
