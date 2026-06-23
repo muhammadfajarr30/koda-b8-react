@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-// 1. Definisikan Schema Validasi Register
 const registerSchema = yup.object().shape({
   fullName: yup
     .string()
@@ -29,10 +29,9 @@ const registerSchema = yup.object().shape({
 });
 
 const RegisterPage = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("data")) || []);
+  const [user, setUser] = useLocalStorage("data")
   const navigate = useNavigate();
 
-  // 2. Hubungkan dengan yupResolver
   const {
     register,
     handleSubmit,
@@ -43,9 +42,14 @@ const RegisterPage = () => {
   });
   const inputData = (data) => {
     const { confirmPassword, termsAndCondition, ...userData } = data;
+
+    const isEmailExist = user.some((e)=> e.email === userData.email)
+    if (isEmailExist) {
+      alert ("email sudah terdaftar, silakan login atau register dengan email lain")
+    }
+
     const newData = [...user, userData];
-    localStorage.setItem("data", JSON.stringify(newData));
-    setUser(newData);
+    setUser(newData)
     alert("Pendaftaran berhasil! Silakan login.");
     reset();
     navigate("/login"); 
