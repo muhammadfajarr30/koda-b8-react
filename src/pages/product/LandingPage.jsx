@@ -13,77 +13,6 @@ import FeaturedProductCard from "../../components/FeaturedProductCard";
 import { categories } from "../../data/categories";
 import { products } from "../../data/products";
 
-// const categoriesLink = [
-//   {
-//     title: "Elektronik",
-//     amount: 5,
-//     thumbnail: "electronic",
-//   },
-//   {
-//     title: "Fashion",
-//     amount: 10,
-//     thumbnail: "fashion",
-//   },
-//   {
-//     title: "Rumah & Dapur",
-//     amount: 10,
-//     thumbnail: "house-kitchen",
-//   },
-//   {
-//     title: "Kecantikan",
-//     amount: 10,
-//     thumbnail: "beauty",
-//   },
-//   {
-//     title: "Olahraga",
-//     amount: 10,
-//     thumbnail: "sport",
-//   },
-//   {
-//     title: "Buku & Alat Tulis",
-//     amount: 10,
-//     thumbnail: "book",
-//   },
-// ];
-
-// const productsFlashItems = [
-//   {
-//     thumbnail: "headphone",
-//     storeName: "soundwave",
-//     brand: "Headphone Wireless Premium",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "smartphone",
-//     storeName: "PhoneX",
-//     brand: "wristTech",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4200000,
-//     regularPrice: 5000000,
-//   },
-//   {
-//     thumbnail: "smartwatch",
-//     storeName: "wirstTch",
-//     brand: "SmartWatch series 5",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "sneakers",
-//     storeName: "SportPro",
-//     brand: "Sneakers Sport Runfast",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-// ];
 
 const newestProductItems = [
   {
@@ -213,7 +142,7 @@ const LandingPage = () => {
         <button className="carousel-btn carousel-btn-left flex items-center justify-center bg-[#FFFFFF33] absolute top-[50%] p-3 -translate-y-3/6 rounded-full z-99">
           <ChevronLeft />
         </button>
-        <div className="carousel-item carousel-item1 flex flex-col gap-8 justify-center w-1/2 bg-[#6720ea]">
+        <div className="carousel-item carousel-item1 flex p-20 flex-col gap-8 justify-center w-1/2 bg-[#6720ea]">
           <h1 className="font-bold text-5xl">
             Elektronik Pilihan, Harga Spesial
           </h1>
