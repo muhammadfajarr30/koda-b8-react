@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "/src/components/Navbar";
 import Footer from "/src/components/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import {
   ChevronRight,
   CreditCard,
@@ -15,7 +15,14 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
+import { useAuth } from "../context/AuthContext";
 const ProfilLayout = () => {
+  const navigate = useNavigate();
+  const {user, logout} = useAuth()
+  const handleLogout = ()=> {
+    logout()
+    navigate("/login")
+  }
   return (
     <>
       <Navbar />
@@ -85,7 +92,7 @@ const ProfilLayout = () => {
 
               <div className="border-t border-gray-300 pt-4 ">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-red-500">
+                  <div onClick={handleLogout} className="flex items-center gap-2 text-red-500">
                     <LogOut />
                     <p>Keluar</p>
                   </div>
