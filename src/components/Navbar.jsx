@@ -8,14 +8,14 @@ import {
   ShoppingCart,
   User,
 } from "lucide-react";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const currentUser =
-    JSON.parse(localStorage.getItem("account")) || {};
-
-  const lastName =
-    currentUser.fullName?.split(" ").slice(-1)[0] || "Guest";
-    console.log(currentUser)
+  const {user} = useAuth()
+  console.log(user)
+const userLogin = useLocalStorage("hihi")
+  const firstName = user.fullName?.split(" ")[0] || "Guest";
   return (
     <>
       <header className="bg-[#1a73e8] text-white px-50 py-1.25">
@@ -55,7 +55,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/profile/edit-profile" className="flex items-center gap-2">
                 <User size={16} />
-                <span>{lastName}</span>
+                <span>{firstName}</span>
               </Link>
             </li>
             <Link to="/profile/wishlist" className="nav-item">
