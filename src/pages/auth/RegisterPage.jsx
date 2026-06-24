@@ -42,7 +42,6 @@ const RegisterPage = () => {
   });
   const inputData = (data) => {
     const { confirmPassword, termsAndCondition, ...userData } = data;
-
     const isEmailExist = user.some((e)=> e.email === userData.email)
     if (isEmailExist) {
       alert ("email sudah terdaftar, silakan login atau register dengan email lain")
