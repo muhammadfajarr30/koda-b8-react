@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import AuthContext from "../../context/AuthContext";
+import AuthContext, { useAuth } from "../../context/AuthContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -19,7 +20,9 @@ const loginSchema = yup.object().shape({
 });
 const LoginPage = () => {
   const auth = useContext(AuthContext);
+  const {login} = useAuth()
   const navigate = useNavigate();
+  const [registerUser] = useLocalStorage("data")
   const {
     register,
     handleSubmit,
@@ -28,17 +31,15 @@ const LoginPage = () => {
     resolver: yupResolver(loginSchema),
   });
   const handleLogin = (data) => {
-    const users = JSON.parse(localStorage.getItem("data")) || [];
-    const user = users.find(
-      (item) => item.email === data.email && item.password === data.password,
-    );
-
-    if (user) {
-      alert("Login berhasil!");
-      localStorage.setItem("account", JSON.stringify(user));
-      navigate("/");
+    const userFound = registerUser.find((e)=>
+      e.email === data.email && e.password === data.password
+    )
+    if (userFound) {
+      login(userFound);
+      alert("login berhasil")
+      navigate("/")
     } else {
-      alert("Email atau password salah!");
+      alert("email atau password salah")
     }
   };
   return (
@@ -138,3 +139,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+  
