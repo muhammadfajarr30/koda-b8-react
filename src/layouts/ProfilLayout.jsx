@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "/src/components/Navbar";
-import Footer from "/src/components/Footer";
+import Navbar from "../components/main/Navbar";
+import Footer from "../components/main/Footer";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
   ChevronRight,

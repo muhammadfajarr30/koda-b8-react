@@ -1,13 +1,13 @@
 import React from "react";
 import MainLayout from "./MainLayout";
 import { Outlet } from "react-router-dom";
-import Navbar from "/src/components/Navbar";
-import Footer from "/src/components/Footer";
+import Navbar from "../components/main/Navbar";
+import Footer from "../components/main/Footer";
 
 const CheckoutLayout = () => {
   return (
     <>
-      <Navbar />
+    <Navbar/>
       <div className=" py-4 bg-gray-100">
         <div>
           <div className="flex items-center justify-center">
@@ -71,7 +71,7 @@ const CheckoutLayout = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };
