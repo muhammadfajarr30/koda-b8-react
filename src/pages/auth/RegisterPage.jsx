@@ -8,9 +8,7 @@ import * as yup from "yup";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 const registerSchema = yup.object().shape({
-  fullName: yup
-    .string()
-    .required("Nama lengkap wajib diisi"),
+  fullName: yup.string().required("Nama lengkap wajib diisi"),
   email: yup
     .string()
     .email("Format email tidak valid")
@@ -29,7 +27,7 @@ const registerSchema = yup.object().shape({
 });
 
 const RegisterPage = () => {
-  const [user, setUser] = useLocalStorage("data")
+  const [users, setUsers] = useLocalStorage("data_users", []);
   const navigate = useNavigate();
 
   const {
@@ -42,16 +40,31 @@ const RegisterPage = () => {
   });
   const inputData = (data) => {
     const { confirmPassword, termsAndCondition, ...userData } = data;
-    const isEmailExist = user.some((e)=> e.email === userData.email)
+
+    const isEmailExist = users.some((e) => e.email === userData.email);
+
     if (isEmailExist) {
-      alert ("email sudah terdaftar, silakan login atau register dengan email lain")
+      alert(
+        "email sudah terdaftar, silakan login atau register dengan email lain",
+      );
+      return;
     }
 
-    const newData = [...user, userData];
-    setUser(newData)
+    const newUser = {
+      ...userData,
+      cart: [],
+      wishlist: [],
+      orders: [],
+    };
+
+    const newData = [...users, newUser];
+
+    setUsers(newData);
+
     alert("Pendaftaran berhasil! Silakan login.");
+
     reset();
-    navigate("/login"); 
+    navigate("/login");
   };
   return (
     <div className="grid grid-cols-2">
@@ -66,7 +79,9 @@ const RegisterPage = () => {
         ]}
       />
       <section className="login flex items-center justify-center">
-        <form onSubmit={handleSubmit(inputData)} className="flex flex-col gap-4 w-full max-w-md px-4">
+        <form
+          onSubmit={handleSubmit(inputData)}
+          className="flex flex-col gap-4 w-full max-w-md px-4">
           <div className="heading">
             <h2 className="font-bold text-2xl">Daftar Akun Baru</h2>
             <p className="text-gray-500">
@@ -77,13 +92,23 @@ const RegisterPage = () => {
             </p>
           </div>
           <div className="social-login w-full flex gap-2">
-            <button className="border border-gray-400 w-full p-3 rounded-2xl text-gray-500" type="button">Daftar via Google</button>
-            <button className="border border-gray-400 w-full p-3 rounded-2xl text-gray-500" type="button">Daftar via Facebook</button>
+            <button
+              className="border border-gray-400 w-full p-3 rounded-2xl text-gray-500"
+              type="button">
+              Daftar via Google
+            </button>
+            <button
+              className="border border-gray-400 w-full p-3 rounded-2xl text-gray-500"
+              type="button">
+              Daftar via Facebook
+            </button>
           </div>
 
           <div className="flex items-center gap-4 my-4">
             <div className="h-px flex-1 bg-gray-300"></div>
-            <span className="text-sm text-gray-500">atau daftar dengan email</span>
+            <span className="text-sm text-gray-500">
+              atau daftar dengan email
+            </span>
             <div className="h-px flex-1 bg-gray-300"></div>
           </div>
           <div className="form-group flex flex-col font-medium">
@@ -95,7 +120,11 @@ const RegisterPage = () => {
               id="name"
               placeholder="Budi Santoso"
             />
-            {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>}
+            {errors.fullName && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.fullName.message}
+              </p>
+            )}
           </div>
           <div className="form-group flex flex-col font-medium">
             <label htmlFor="email">Email</label>
@@ -106,7 +135,11 @@ const RegisterPage = () => {
               id="email"
               placeholder="email@contoh.com"
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
           <div className="form-group flex flex-col">
             <label htmlFor="password">Kata Sandi</label>
@@ -117,7 +150,11 @@ const RegisterPage = () => {
               id="password"
               placeholder="Masukkan kata sandi"
             />
-            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
           <div className="form-group flex flex-col">
             <label htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
@@ -128,22 +165,40 @@ const RegisterPage = () => {
               id="confirmPassword"
               placeholder="Ulangi kata sandi"
             />
-            {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </div>
           <div className="remember text-gray-500">
             <label className="flex gap-2 items-start">
-              <input {...register("termsAndCondition")} type="checkbox" className="mt-1" />
+              <input
+                {...register("termsAndCondition")}
+                type="checkbox"
+                className="mt-1"
+              />
               <p className="text-sm">
-                Saya Menyetujui <Link className="text-blue-500" to="/terms">Syarat & Ketentuan</Link> dan{" "}
-                <Link className="text-blue-500" to="/privacy">Kebijakan Privasi</Link> BeliMudah
+                Saya Menyetujui{" "}
+                <Link className="text-blue-500" to="/terms">
+                  Syarat & Ketentuan
+                </Link>{" "}
+                dan{" "}
+                <Link className="text-blue-500" to="/privacy">
+                  Kebijakan Privasi
+                </Link>{" "}
+                BeliMudah
               </p>
             </label>
-            {errors.termsAndCondition && <p className="text-red-500 text-sm mt-1">{errors.termsAndCondition.message}</p>}
+            {errors.termsAndCondition && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.termsAndCondition.message}
+              </p>
+            )}
           </div>
           <button
             className="btn-login w-full bg-orange-500 p-4 rounded-2xl text-white flex items-center gap-2 justify-center font-bold"
-            type="submit"
-          >
+            type="submit">
             Daftar Sekarang
             <ArrowRight size={18} />
           </button>
