@@ -1,5 +1,5 @@
 // import App from "../App";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "../pages/product/LandingPage";
 import BrowsePage from "../pages/product/BrowsePage";
 import MainLayout from "/src/layouts/MainLayout";
@@ -19,7 +19,6 @@ import RegisterPage from "../pages/auth/RegisterPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import CheckoutSuccessPage from "../pages/checkout/CheckoutSuccessPage";
 
-
 export const router = createBrowserRouter([
   // {
   //   children: [{ path: "/", element: <App /> }],
@@ -29,9 +28,10 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <LandingPage /> },
       { path: "/browse/:slug", element: <BrowsePage /> },
+      { path: "/browse", element: <BrowsePage /> },
       { path: "/detail-page/:id", element: <DetailPage /> },
       { path: "/cart", element: <CartPage /> },
-      {path: "/checkout-success", element: <CheckoutSuccessPage/>}
+      { path: "/checkout-success", element: <CheckoutSuccessPage /> },
     ],
   },
 
@@ -42,12 +42,12 @@ export const router = createBrowserRouter([
 
   {
     path: "/register",
-    element: <RegisterPage/>
+    element: <RegisterPage />,
   },
 
   {
     path: "/forgot-password",
-    element: <ForgotPasswordPage/>
+    element: <ForgotPasswordPage />,
   },
 
   {
@@ -74,21 +74,35 @@ export const router = createBrowserRouter([
     path: "/profile",
     children: [
       {
-        path:"order",
-        element: <MyOrderPage/>
+        path: "order",
+        element: <MyOrderPage />,
       },
       {
         path: "wishlist",
-        element: <WishlistPage/>
+        element: <WishlistPage />,
       },
       {
         path: "address-list",
-        element:<AddressListPage/>
+        element: <AddressListPage />,
       },
       {
         path: "edit-profile",
-        element:<EditProfilePage/>
+        element: <EditProfilePage />,
       },
-    ]
+    ],
   },
 ]);
+
+import React from "react";
+import { AuthProvider } from "../context/AuthContext";
+// import { ProductProvider } from "../context/productContext";
+
+const index = () => {
+  return (
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+  );
+};
+
+export default index;
