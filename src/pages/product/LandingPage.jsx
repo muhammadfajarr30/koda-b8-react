@@ -8,134 +8,30 @@ import {
 import React from "react";
 import CategoryLink from "../../components/CategoryLink";
 import ProductCard from "../../components/ProductCard";
-import NewestProductCard from "../../components/NewestProductCard";
-import FeaturedProductCard from "../../components/FeaturedProductCard";
 import { categories } from "../../data/categories";
-import { products } from "../../data/products";
-
-
-const newestProductItems = [
-  {
-    thumbnail: "headphone",
-    storeName: "soundwave",
-    brand: "Headphone Wireless Premium",
-    rating: 4.8,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "smartphone",
-    storeName: "PhoneX",
-    brand: "wristTech",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4200000,
-    regularPrice: 5000000,
-  },
-  {
-    thumbnail: "bag",
-    storeName: "urbanBag",
-    brand: "Tas Ransel Laptop Waterproof",
-    rating: 4.5,
-    stocks: 234,
-    price: 350000,
-  },
-  {
-    thumbnail: "blender",
-    storeName: "BlendPro",
-    brand: "Blender Portable Mini",
-    rating: 4.2,
-    stocks: 567,
-    price: 1890000,
-  },
-  {
-    thumbnail: "tablet",
-    storeName: "TabTech",
-    brand: "Tablet 10.5 WiFi + 4G",
-    rating: 4.5,
-    stocks: 345,
-    price: 3200000,
-  },
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-  },
-  {
-    thumbnail: "essential-oil",
-    storeName: "AromaWell",
-    brand: "Minyak Essensial Lavender Set",
-    rating: 4.8,
-    price: 145000,
-    stocks: 134,
-  },
-];
-
-const featuredProductItems = [
-  {
-    thumbnail: "headphone",
-    storeName: "soundwave",
-    brand: "Headphone Wireless Premium",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-  {
-    thumbnail: "smartphone",
-    storeName: "PhoneX",
-    brand: "wristTech",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4200000,
-    regularPrice: 5000000,
-  },
-  {
-    thumbnail: "smartwatch",
-    storeName: "wirstTch",
-    brand: "SmartWatch series 5",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-
-  {
-    thumbnail: "sneakers",
-    storeName: "SportPro",
-    brand: "Sneakers Sport Runfast",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-
-  {
-    thumbnail: "coffe-maker",
-    storeName: "Brewmaster",
-    brand: "Coffe Maker Otomatis",
-    rating: 4.8,
-    stocks: 512,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-
-  {
-    thumbnail: "dress",
-    storeName: "FashionID",
-    brand: "Dress Floral Midi",
-    rating: "4.5",
-    stocks: 312,
-    price: 295000,
-    salePrice: 4500000,
-    regularPrice: 650000,
-  },
-];
-
+import useFetch from "../../hooks/useFetch";
 const LandingPage = () => {
+  const {
+    data: products,
+    loading,
+  } = useFetch("../public/data/products.json")
+  const flashSaleProducts = products.filter((product) =>
+    product.tags.includes("flash-sale")
+  );
+  
+  const newestProducts = products.filter((product) =>
+    product.tags.includes("newest")
+  );
+  
+  const featuredProducts = products.filter((product) =>
+    product.tags.includes("featured")
+  );
+const categoriesWithAmount = categories.map((category) => ({
+  ...category,
+  amount: products.filter(
+    (product) => product.category === category.slug
+  ).length,
+}));
   return (
     <main className="landing-page-content flex flex-col gap-6 bg-[#f8f9fb]">
       <section className="jumbo-carousel flex relative text-white">
@@ -167,7 +63,6 @@ const LandingPage = () => {
           <ChevronRight />
         </button>
       </section>
-
       <section className="category-prod flex flex-col gap-4 px-50">
         <div className="label flex justify-between">
           <h4 className="">Belanja Berdasarkan Kategori</h4>
@@ -177,7 +72,7 @@ const LandingPage = () => {
           </a>
         </div>
         <div className="category-prod-container grid grid-cols-6 gap-4">
-          {categories.map((category, i) => (
+          {categoriesWithAmount.map((category, i) => (
             <CategoryLink
               key={category.slug}
               title={category.title}
@@ -189,7 +84,6 @@ const LandingPage = () => {
           ))}
         </div>
       </section>
-
       <section className="flash-deal px-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -208,9 +102,10 @@ const LandingPage = () => {
           </a>
         </div>
         <div className="flash-sale-items grid grid-cols-4 gap-4">
-          {products.map((product, i) => (
+          {flashSaleProducts.map((product, i) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               thumbnail={product.thumbnail}
               storeName={product.storeName}
               brand={product.brand}
@@ -219,12 +114,10 @@ const LandingPage = () => {
               regularPrice={product.regularPrice}
               stocks={product.stocks}
               idx={i + 1}
-              id={product.id}
             />
           ))}
         </div>
       </section>
-
       <section className="deals-container gap-4 flex px-50">
         <div className="deal deal-1 flex-1 relative ">
           <img
@@ -255,7 +148,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
       <section className="shop-by-category px-50">
         <div className="label flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -268,23 +160,22 @@ const LandingPage = () => {
           </a>
         </div>
         <div className="flash-sale-items grid grid-cols-4 gap-4">
-          {newestProductItems.map((e, i) => (
-            <NewestProductCard
-              key={e.thumbnail}
-              storeName={e.storeName}
-              thumbnail={e.thumbnail}
-              brand={e.brand}
-              rating={e.rating}
-              salePrice={e.salePrice}
-              regularPrice={e.regularPrice}
-              price={e.price}
-              stocks={e.stocks}
+          {newestProducts.map((product, i) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              storeName={product.storeName}
+              thumbnail={product.thumbnail}
+              brand={product.brand}
+              rating={product.rating}
+              salePrice={product.salePrice}
+              regularPrice={product.regularPrice}
+              stocks={product.stocks}
               idx={i + 1}
             />
           ))}
         </div>
       </section>
-
       <section className="p-50">
         <div className="label flex items-center justify-between">
           <h4 className="font-bold text-2xl">Produk Unggulan</h4>
@@ -294,22 +185,22 @@ const LandingPage = () => {
           </a>
         </div>
         <div className="flash-sale-items grid grid-cols-4 gap-4">
-          {featuredProductItems.map((e, i) => (
-            <FeaturedProductCard
-              key={e.thumbnail}
-              thumbnail={e.thumbnail}
-              storeName={e.storeName}
-              brand={e.brand}
-              rating={e.rating}
-              salePrice={e.salePrice}
-              regularPrice={e.regularPrice}
-              stocks={e.stocks}
+          {featuredProducts.map((product, i) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              thumbnail={product.thumbnail}
+              storeName={product.storeName}
+              brand={product.brand}
+              rating={product.rating}
+              salePrice={product.salePrice}
+              regularPrice={product.regularPrice}
+              stocks={product.stocks}
               idx={i + 1}
             />
           ))}
         </div>
       </section>
-
       <section className="why-shop-section p-50">
         <div className="bg-white why-shop-container border flex flex-col p-9 rounded-2xl gap-6 border-[#0000001a]">
           <h3 className="text-center font-bold text-2xl">
