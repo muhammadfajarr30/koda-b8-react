@@ -12,8 +12,8 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
-  const {user} = useAuth()
-  const firstName = user.fullName?.split(" ")[0] || "Guest";
+  const {account} = useAuth()
+  const firstName = account.fullName?.split(" ")[0] || "Guest";
   return (
     <>
 <header className="bg-[#1a73e8] text-white">
@@ -100,7 +100,7 @@ const Navbar = () => {
 
   <div className="border-t border-gray-200">
     <div className="container mx-auto px-6 lg:px-12">
-      <ul className="flex items-center gap-8 py-3 overflow-x-auto whitespace-nowrap text-sm">
+      <ul className="flex items-center gap-8 py-3 overflow-x-auto whitespace-nowrap text-sm justify-center">
         <li className="flex items-center gap-2 font-medium cursor-pointer">
           <Menu size={16} />
           <span>Semua Kategori</span>
