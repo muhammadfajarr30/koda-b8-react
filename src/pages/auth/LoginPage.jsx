@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../context/AuthContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/reducer/authSlice";
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -19,9 +21,10 @@ const loginSchema = yup.object().shape({
   remember: yup.boolean(),
 });
 const LoginPage = () => {
-  const { login } = useAuth();
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [users] = useLocalStorage("data_users", []);
+
   const {
     register,
     handleSubmit,
@@ -30,6 +33,10 @@ const LoginPage = () => {
     resolver: yupResolver(loginSchema),
   });
   const handleLogin = (data) => {
+    const userIndex = users.findIndex(
+      (user) => user.email === data.email && user.password === data.password,
+    );
+
     const userFound = users.find(
       (user) => user.email === data.email && user.password === data.password,
     );
@@ -41,7 +48,14 @@ const LoginPage = () => {
       return;
     }
 
-    login(userFound);
+    dispatch(
+      login({
+        id: userIndex,
+        fullName: userFound.fullName,
+        email: data.email,
+        password: data.password,
+      }),
+    );
 
     alert("Login berhasil");
     navigate("/");

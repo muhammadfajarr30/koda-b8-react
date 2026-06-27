@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../../redux/reducer/userSlice";
 
 const registerSchema = yup.object().shape({
   fullName: yup.string().required("Nama lengkap wajib diisi"),
@@ -27,7 +29,8 @@ const registerSchema = yup.object().shape({
 });
 
 const RegisterPage = () => {
-  const [users, setUsers] = useLocalStorage("data_users", []);
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const {
@@ -57,9 +60,7 @@ const RegisterPage = () => {
       orders: [],
     };
 
-    const newData = [...users, newUser];
-
-    setUsers(newData);
+    dispatch(addUser(newUser));
 
     alert("Pendaftaran berhasil! Silakan login.");
 
