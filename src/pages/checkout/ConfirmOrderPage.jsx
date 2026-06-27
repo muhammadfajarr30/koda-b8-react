@@ -1,45 +1,69 @@
 import { Lock, Shield } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formatRupiah } from "../../helpers/format";
+import { clearUserCart } from "../../redux/reducer/userSlice";
 
 const ConfirmOrderPage = () => {
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { items, shipmentDetails, paymentMethod } = useSelector(
+    (state) => state.order,
+  );
+
+  const { name, phone, address, city, province, zip, shipping } =
+    shipmentDetails;
+
+  const handleConfirm = () => {
+    dispatch(clearUserCart({ userIndex: user.id }));
+    navigate("/checkout-success");
+  };
+
   return (
-    <section class="confirm-order bg-white border border-gray-300 rounded-xl p-4">
-      <div class="container flex flex-col gap-4">
-        <div class="heading">
+    <section className="confirm-order bg-white border border-gray-300 rounded-xl p-4">
+      <div className="container flex flex-col gap-4">
+        <div className="heading">
           <h3 className="text-xl font-semibold">Konfirmasi Pesanan</h3>
         </div>
-        <div class="address-card p-4 bg-gray-100 rounded-xl">
+        <div className="address-card p-4 bg-gray-100 rounded-xl">
           <p>Alamat Pengiriman</p>
-          <p>Budi Santoso · 0812-3456-7890</p>
-          <p>Jl. Kebon Jeruk No. 15, Jakarta Barat, DKI Jakarta 11530</p>
+          <p>
+            {name} · {phone}
+          </p>
+          <p>
+            {address} {city} {province} {zip}
+          </p>
         </div>
-        <div class="shipping-info p-4 bg-gray-100 rounded-xl">
+        <div className="shipping-info p-4 bg-gray-100 rounded-xl">
           <p>Metode Pengiriman</p>
-          <p>JNE Reguler · 3-5 hari kerja</p>
+          <p>{shipping} · 3-5 hari kerja</p>
         </div>
-        <div class="ordered-products p-4 bg-gray-100 rounded-xl">
+        <div className="ordered-products p-4 bg-gray-100 rounded-xl">
           <p>Produk yang Dipesan</p>
 
-          <div class="product-list">
-            <div class="product-item flex justify-between">
-              <div class="product-detail flex gap-2 items-center">
-                <div className="w-10 rounded-lg overflow-hidden">
-                  <img src="/images/headphone.png" alt="" />
+          <div className="product-list">
+            {items?.map((item, idx) => (
+              <div className="product-item flex justify-between">
+                <div className="product-detail flex gap-2 items-center">
+                  <div className="w-10 rounded-lg overflow-hidden">
+                    <img src={`/images/${item.thumbnail}.png`} alt="" />
+                  </div>
+
+                  <div className="product-info">
+                    <p>{item.brand}</p>
+                    <p>1x</p>
+                  </div>
                 </div>
 
-                <div class="product-info">
-                  <p>Headphone Wireless Premium</p>
-                  <p>1x</p>
-                </div>
+                <p className="product-price">{formatRupiah(item.salePrice)}</p>
               </div>
-
-              <p class="product-price">Rp 450.000</p>
-            </div>
+            ))}
           </div>
         </div>
-        <div class="payment-notice flex items-center gap-2 bg-blue-100 rounded-xl p-4 text-gray-500">
+        <div className="payment-notice flex items-center gap-2 bg-blue-100 rounded-xl p-4 text-gray-500">
           <Shield color="#17A" />
           <p>
             Dengan menekan "Bayar Sekarang", kamu menyetujui Syarat & Ketentuan
@@ -47,15 +71,15 @@ const ConfirmOrderPage = () => {
             langkah ini.
           </p>
         </div>
-        <div class="return-payment flex gap-2">
+        <div className="return-payment flex gap-2">
           <button
             onClick={() => navigate(-1)}
-            class="btn-return border border-gray-300 p-4 rounded-xl">
+            className="btn-return border border-gray-300 p-4 rounded-xl">
             Kembali
           </button>
           <button
-            onClick={() => navigate("/checkout-success")}
-            class="btn-payment w-full flex gap-2 justify-center bg-orange-500 text-white p-4 rounded-xl">
+            onClick={handleConfirm}
+            className="btn-payment w-full flex gap-2 justify-center bg-orange-500 text-white p-4 rounded-xl">
             <Lock size={20} />
             <p>Bayar Sekarang</p>
           </button>
