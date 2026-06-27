@@ -16,9 +16,16 @@ export const userSlice = createSlice({
       if (!state[userIndex]) return;
       state[userIndex].cart.push(product);
     },
+
+    clearUserCart: (state, { payload }) => {
+      const { userIndex } = payload;
+
+      if (!state[userIndex]) return;
+      state[userIndex].cart = [];
+    }
   },
 });
 
-export const { addUser, addUserCart } = userSlice.actions;
+export const { addUser, addUserCart, clearUserCart } = userSlice.actions;
 
 export default userSlice.reducer;
