@@ -3,6 +3,7 @@ import { Shield, Trash2, Tag, Heart } from "lucide-react";
 import NewestProductCard from "../../components/NewestProductCard";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 const CartPage = () => {
   const mayYouLike = [
     {
@@ -42,16 +43,10 @@ const CartPage = () => {
       regularPrice: 650000,
     },
   ];
-  const [cart, setCart] = useState(() => {
-    const data = localStorage.getItem("account");
-    if (!data) return null;
-    const accounts = JSON.parse(data);
-    return accounts.cart;
-  });
-
+  const user = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.users[user.id]);
   const navigate = useNavigate();
 
-  console.log(cart);
   return (
     <div className="flex flex-col gap-9 px-56 bg-gray-50">
       <div>
@@ -61,7 +56,7 @@ const CartPage = () => {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
           <div className="space-y-6">
             <div className="rounded-2xl border border-gray-200 bg-white p-6">
-              {cart.map((product) => (
+              {cart?.map((product) => (
                 <div className="flex flex-col gap-4 sm:flex-row">
                   <div className="h-24 w-24 flex-shrink: 0 overflow-hidden rounded-xl">
                     <img
@@ -170,7 +165,7 @@ const CartPage = () => {
             thumbnail={e.thumbnail}
             rating={e.rating}
             salePricerice={e.salePrice}
-            brand={e.brand}
+            brand={e?.brand}
             stocks={e.stocks}
             regularPrice={e.regularPrice}
             idx={i + 1}
