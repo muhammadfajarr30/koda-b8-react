@@ -1,7 +1,22 @@
-import { ArrowRight, Check, CheckCircle2, MapPin, Package, Truck } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  MapPin,
+  Package,
+  Truck,
+} from "lucide-react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formatRupiah } from "../../helpers/format";
 
 const CheckoutSuccessPage = () => {
+  const { items, shipmentDetails } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+  const { name, phone, address, city, province, zip, shipping } =
+    shipmentDetails;
+  const totalPrice = items.reduce((accum, item) => accum + item.salePrice, 0);
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 relative ">
       <div className="w-full max-w-3xl   p-6 md:p-8 flex flex-col items-center text-center">
@@ -24,14 +39,16 @@ const CheckoutSuccessPage = () => {
             </div>
             <div className="text-right">
               <p className="text-xs text-slate-400">Total Pembayaran</p>
-              <p className="text-sm font-bold text-slate-800">Rp 450.000</p>
+              <p className="text-sm font-bold text-slate-800">
+                {formatRupiah(totalPrice)}
+              </p>
             </div>
           </div>
           <div className="flex gap-3 items-start">
             <Truck className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-semibold text-slate-700">
-                JNE Reguler
+                {shipmentDetails.shipping}
               </p>
               <p className="text-xs text-slate-400">
                 Estimasi tiba: 3-5 Juni 2026
@@ -45,7 +62,7 @@ const CheckoutSuccessPage = () => {
                 Alamat Pengiriman
               </p>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Jl. Kebon Jeruk No. 15, Jakarta Barat, DKI Jakarta 11530
+                {address} {city} {province} {zip}
               </p>
             </div>
           </div>
@@ -119,7 +136,6 @@ const CheckoutSuccessPage = () => {
           </button>
         </div>
       </div>
-
     </div>
   );
 };
