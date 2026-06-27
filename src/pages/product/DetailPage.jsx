@@ -8,6 +8,8 @@ import { formatRupiah } from "../../helpers/format";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { addUserCart } from "../../redux/reducer/userSlice";
 const relatedProduct = [
   {
     thumbnail: "headphone",
@@ -49,8 +51,10 @@ const relatedProduct = [
 ];
 
 const DetailPage = () => {
+  const user = useSelector((state) => state.auth);
   const { id } = useParams();
-  const { account, setAccount, users, setUsers } = useAuth();
+  const dispatch = useDispatch();
+  // const { account, setAccount, users, setUsers } = useAuth();
   const navigate = useNavigate();
   const { data: products, loading, error } = useFetch("/data/products.json");
 
@@ -62,25 +66,15 @@ const DetailPage = () => {
     return <h1>{error}</h1>;
   }
 
-  console.log(account)
+  // console.log(account);
   const product = products.find((e) => e.id === id);
   const handleAddToCart = () => {
-    if (!account) {
-      alert("silakan login terlebih dahulu")
-      navigate("/login")
-      return 
-    }
-    const updatedAccount = {
-      ...account,
-      cart: [...(account.cart || []), product],
-    };
-    
-    setAccount(updatedAccount);
-    // const updatedUsers = users.map((user) =>
-    //   user.email === account.email ? updatedAccount : user
-    // );
-    
-    // setUsers(updatedUsers);
+    dispatch(
+      addUserCart({
+        userIndex: user.id,
+        product: product,
+      }),
+    );
   };
 
   return (
