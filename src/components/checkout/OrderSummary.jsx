@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { formatRupiah } from "../../helpers/format";
 
 function OrderSummary() {
-  const user = useSelector((state)=> state.auth)
-  const { cart } = useSelector((state)=> state.users[user.id])
+  const { items } = useSelector((state) => state.order);
+
+  const totalPrice = items.reduce((accum, item) => accum + item.salePrice, 0);
 
   return (
     <>
@@ -15,11 +17,11 @@ function OrderSummary() {
           </h3>
 
           <div className="flex flex-col gap-2">
-            {cart.map((product) => (
-              <div className="flex items-center gap-4">
+            {items.map((product, idx) => (
+              <div key={idx} className="flex items-center gap-4">
                 <div className="h-16 w-16 overflow-hidden rounded-xl bg-gray-100">
                   <img
-                    src="/images/headphone.png"
+                    src={`/images/${product.thumbnail}.png`}
                     alt="Headphone"
                     className="h-full w-full object-cover"
                   />
@@ -42,7 +44,7 @@ function OrderSummary() {
           <div className="space-y-3">
             <div className="flex justify-between text-gray-600">
               <span>Subtotal</span>
-              <span>Rp 450.000</span>
+              <span>{formatRupiah(totalPrice)}</span>
             </div>
 
             <div className="flex justify-between text-gray-600">
@@ -55,7 +57,7 @@ function OrderSummary() {
 
           <div className="flex justify-between text-lg font-semibold">
             <span>Total</span>
-            <span className="text-orange-500">Rp 450.000</span>
+            <span className="text-orange-500">{formatRupiah(totalPrice)}</span>
           </div>
         </div>
       </section>
