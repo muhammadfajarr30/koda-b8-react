@@ -4,10 +4,12 @@ import storage from "redux-persist/es/storage";
 
 import authReducer from "./reducer/authSlice";
 import userReducer from "./reducer/userSlice";
+import orderReducer from "./reducer/orderSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   users: userReducer,
+  order: orderReducer,
 });
 
 const persistConfig = {
