@@ -4,6 +4,7 @@ import NewestProductCard from "../../components/NewestProductCard";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { formatRupiah } from "../../helpers/format";
 const CartPage = () => {
   const mayYouLike = [
     {
@@ -47,6 +48,8 @@ const CartPage = () => {
   const { cart } = useSelector((state) => state.users[user.id]);
   const navigate = useNavigate();
 
+  const totalPrice = cart.reduce((accum, item) => accum + item.salePrice, 0);
+
   return (
     <div className="flex flex-col gap-9 px-56 bg-gray-50">
       <div>
@@ -89,7 +92,7 @@ const CartPage = () => {
                         </button>
                       </div>
                       <span className="text-xl font-medium text-blue-600">
-                        Rp 450.000
+                        {formatRupiah(product.salePrice)}
                       </span>
                     </div>
                     <button className="mt-4 flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600">
@@ -128,8 +131,8 @@ const CartPage = () => {
             </h2>
             <div className="mt-6 space-y-4">
               <div className="flex justify-between text-gray-500">
-                <span>Subtotal (1 item)</span>
-                <span>Rp 450.000</span>
+                <span>Subtotal ({cart.length} item)</span>
+                <span>{formatRupiah(totalPrice)}</span>
               </div>
               <div className="flex justify-between text-gray-500">
                 <span>Ongkos Kirim</span>
@@ -138,7 +141,9 @@ const CartPage = () => {
               <hr className="border-gray-200" />
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total</span>
-                <span className="text-blue-600">Rp 450.000</span>
+                <span className="text-blue-600">
+                  {formatRupiah(totalPrice)}
+                </span>
               </div>
             </div>
             <button
