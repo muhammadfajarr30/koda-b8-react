@@ -2,7 +2,9 @@ import { CreditCard, Lock } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPaymentMethod } from "../../redux/reducer/orderSlice";
 
 const paymentMethods = [
   { id: "bca", label: "Virtual Account BCA" },
@@ -15,6 +17,7 @@ const paymentMethods = [
 
 const PaymentPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -26,25 +29,8 @@ const PaymentPage = () => {
     },
   });
 
-  const [user, setUser] = useState(() => {
-    const data = localStorage.getItem("account");
-    if (!data) return null;
-    const account = JSON.parse(data);
-    return account;
-  });
-
   const onSubmit = (data) => {
-    console.log(data);
-    const updateUser = { 
-      ...user, 
-      checkout : { 
-        ...user.checkout, 
-        payment: data.payment,
-      }
-    }
-
-    setUser(updateUser); 
-    localStorage.setItem("account", JSON.stringify(updateUser));
+    dispatch(setPaymentMethod(data?.payment));
     navigate("/checkout/confirm-order");
   };
 
