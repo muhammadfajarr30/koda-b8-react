@@ -1,13 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function OrderSummary() {
-  const [cart, setCart] = useState(() => {
-    const data = localStorage.getItem("account");
-    if (!data) return null;
-    const account = JSON.parse(data);
-    return account.cart;
-  });
+  const user = useSelector((state)=> state.auth)
+  const { cart } = useSelector((state)=> state.users[user.id])
+
   return (
     <>
       <section className="order-summary">
