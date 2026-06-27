@@ -3,8 +3,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUserCart } from "../../redux/reducer/userSlice";
+import {
+  addCartToItems,
+  setShipmentDetails,
+} from "../../redux/reducer/orderSlice";
 
 const AddressPage = () => {
+  const user = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.users[user.id]);
+
+  const dispatch = useDispatch();
   const { account, setAccount, users, setUsers } = useAuth();
   const navigate = useNavigate();
 
@@ -29,16 +39,13 @@ const AddressPage = () => {
   const onSubmit = (data) => {
     console.log(data);
 
-    const updateUser = {
-      ...account,
-      shipping: [...(account.shipping || []), data],
-      checkout: {
-        cart: account.cart,
-        shipping: data,
-      },
-    };
-
-    setAccount(updateUser);
+    // dispatch(
+    //   clearUserCart({
+    //     userIndex: user.id,
+    //   }),
+    // );
+    dispatch(setShipmentDetails(data));
+    dispatch(addCartToItems(cart));
     navigate("/checkout/payment");
   };
 
