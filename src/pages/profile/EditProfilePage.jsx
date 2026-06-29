@@ -24,25 +24,25 @@ const EditProfilePage = () => {
             <p className=" text-blue-500 font-medium">ganti foto profil</p>
           </div>
         </div>
-        <form class="flex flex-col text-gray-500 gap-6">
-          <div class="label-input flex flex-col">
-            <label for="fullname">Nama Lengkap</label>
+        <form className="flex flex-col text-gray-500 gap-6">
+          <div className="label-input flex flex-col">
+            <label htmlFor="fullname">Nama Lengkap</label>
             <input className="bg-blue-50 border border-gray-300 px-3 py-1.5 rounded-xl" type="text" id="fullname" name="fullname" />
           </div>
-          <div class="label-input flex flex-col">
-            <label for="email">Email</label>
+          <div className="label-input flex flex-col">
+            <label htmlFor="email">Email</label>
             <input className="bg-blue-50 border border-gray-300 px-3 py-1.5 rounded-xl" type="email" id="email" name="email" />
           </div>
-          <div class="label-input flex flex-col">
-            <label for="telephone">Nomor Telepon</label>
+          <div className="label-input flex flex-col">
+            <label htmlFor="telephone">Nomor Telepon</label>
             <input className="bg-blue-50 border border-gray-300 px-3 py-1.5 rounded-xl" type="text" id="telephone" name="telephone" />
           </div>
-          <div class="label-input flex flex-col">
-            <label for="birth-date">Tanggal Lahir</label>
+          <div className="label-input flex flex-col">
+            <label htmlFor="birth-date">Tanggal Lahir</label>
             <input className="bg-blue-50 border border-gray-300 px-3 py-1.5 rounded-xl" type="date" id="birth-date" name="birth-date" />
           </div>
-          <div class="label-input flex flex-col">
-            <label for="gender">Jenis Kelamin</label>
+          <div className="label-input flex flex-col">
+            <label htmlFor="gender">Jenis Kelamin</label>
             <input className="bg-blue-50 border border-gray-300 px-3 py-1.5 rounded-xl" type="text" id="gender" />
           </div>
         </form>
