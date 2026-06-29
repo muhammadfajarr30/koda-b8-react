@@ -1,4 +1,9 @@
-import { products } from "./products";
+import useFetch from "../hooks/useFetch";
+
+// const {
+//   data: products,
+//   loading,
+// } = useFetch("../../public/data/products.json")
 
 export const categories = [
   { slug: "elektronik", title: "Elektronik", thumbnail: "electronic" },
@@ -7,7 +12,8 @@ export const categories = [
   { slug: "kecantikan", title: "Kecantikan", thumbnail: "beauty" },
   { slug: "olahraga", title: "Olahraga", thumbnail: "sport" },
   { slug: "buku-alat-tulis", title: "Buku & Alat Tulis", thumbnail: "book" },
-].map((category) => ({
-  ...category,
-  amount: products.filter((p) => p.category === category.slug).length,
-}));
+]
+// .map((category) => ({
+//   ...category,
+//   amount: products.filter((p) => p.category === category.slug).length,
+// }));
