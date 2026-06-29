@@ -1,139 +1,22 @@
 import { ChevronRight } from "lucide-react";
 import React from "react";
 import BrowseProductCard from "../../components/BrowseProductCard";
-import { products } from "../../data/products";
+// import  products  from "../../data/products";
 import { categories } from "../../data/categories";
 import { useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
-// const browseProductItems = [
-//   {
-//     thumbnail: "headphone",
-//     storeName: "soundwave",
-//     brand: "Headphone Wireless Premium",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "smartphone",
-//     storeName: "PhoneX",
-//     brand: "wristTech",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4200000,
-//     regularPrice: 5000000,
-//   },
-//   {
-//     thumbnail: "smartwatch",
-//     storeName: "wirstTch",
-//     brand: "SmartWatch series 5",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-
-//   {
-//     thumbnail: "sneakers",
-//     storeName: "SportPro",
-//     brand: "Sneakers Sport Runfast",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-
-//   {
-//     thumbnail: "coffe-maker",
-//     storeName: "Brewmaster",
-//     brand: "Coffe Maker Otomatis",
-//     rating: 4.8,
-//     stocks: 512,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-//   {
-//     thumbnail: "dress",
-//     storeName: "FashionID",
-//     brand: "Dress Floral Midi",
-//     rating: "4.5",
-//     stocks: 312,
-//     price: 295000,
-//     salePrice: 4500000,
-//     regularPrice: 650000,
-//   },
-// ];
 
 const BrowsePage = () => {
+  const { data: products, loading } = useFetch(
+    "../../public/data/products.json",
+  );
   const { slug } = useParams();
 
   const filteredProducts = products.filter(
     (product) => product.category === slug,
-    
   );
-  
+
   return (
     <>
       <main className="relative bg-gray-100">
