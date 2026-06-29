@@ -1,9 +1,5 @@
 import useFetch from "../hooks/useFetch";
 
-// const {
-//   data: products,
-//   loading,
-// } = useFetch("../../public/data/products.json")
 
 export const categories = [
   { slug: "elektronik", title: "Elektronik", thumbnail: "electronic" },
